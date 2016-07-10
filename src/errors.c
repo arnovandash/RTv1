@@ -6,13 +6,13 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 14:26:54 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/09 15:35:11 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/10 17:52:02 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	ft_error(int err)
+void	error(int err)
 {
 	if (err == 1)
 	{

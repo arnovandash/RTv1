@@ -6,78 +6,30 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/09 16:04:34 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/10 22:06:56 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+//TODO
+//hook up malloc NULL errors
+//free all mallocs
+//cone
+//cylinder
+//sphere
+
+
+
+
+
+
+
 
 #include "rtv1.h"
 
 
 
-
-
-/* SCRATCHPIXEL PSEUDO CODE
- * for (each pixel in the image) {
- * // step 1
- * build a camera ray: trace line from current pixel location to camera's aperture;
- * // step 2
- * cast ray into the scene;
- * // step 3
- * if (ray intersects an object) {
- * set current pixel's color with object's color at the intersection point;
- * }
- * else {
- * set current pixel's color to black;
- * }
- * }
- */
-
-
-
-
-
-
-
-/////////////////// GLOBAL VARIABLES ////////////////////
-
-// has the ray hit the object
-//int hit = 0;
-
-
-///////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-//////////////////// SET CAMERA /////////////////////////
-
-//void	camera(t_glob *g)
-//{
-	// origin
-	//	x = WIN_W/2
-	//	y = WIN_H/2
-	//	Z = 0;
-	//
-	// direction
-	//
-
-//}
-
-///////////////////////////////////////////////////////
-
-
-
-
-
-//////////////////// RAY CALCULATIONS /////////////////
+//////////////////// RAY CALCULATIONS /////////////////////////////////////////
 //void	ray(t_glob *g)
 //{
 //	float normalized_x;
@@ -100,35 +52,20 @@
 	//try this normalization with Wolf3D
 //	normalized_x = (x / WIN_W) - 0.5;
 //	normalized_y = (y / WIN_H) - 0.5;
+///////////////////////////////////////////////////////////////////////////////
 
 
 
-	////////////////////////
-
-	/* https://stackoverflow.com/questions/13078243/ray-tracing-camera
-	 *
-	 Ray ComputeCameraRay(int i, int j) {
-	 const float width = 512.0;  // pixels across
-	 const float height = 512.0;  // pixels high
-	 double normalized_i = (i / width) - 0.5;
-	 double normalized_j = (j / height) - 0.5;
-	 Vector3 image_point = normalized_i * camera_right +
-	 normalized_j * camera_up +
-	 camera_position + camera_direction;
-	 Vector3 ray_direction = image_point - camera_position;
-	 return Ray(camera_position, ray_direction);
-	 }
-
-*/
-	////////////////
 
 
 
-	//}
 
 
 
-	///////////////////////////////////////////////////
+
+
+
+
 
 
 
@@ -137,9 +74,22 @@ int		main(int argc, char **argv)
 
 	t_glob		g;
 
+	g.spheres = 0;
+
 	if (argc == 2)
 	{
 		get_scene(&g, argv[1]);
+
+		t_sphere_list *ptr = g.head_s;
+
+printf("PRINTLIST:\n");
+		while (ptr != NULL)
+		{
+		printf("origx %i, origy %i\n",ptr->orig_x, ptr->orig_y);
+//		ptr = ptr->next;
+		}
+
+
 		g.env.mlx = mlx_init();
 		g.env.win = mlx_new_window(g.env.mlx, WIN_W, WIN_H, "RTv1");
 		mlx_hook(g.env.win, 2, (1L << 0), &key_press, &g);
@@ -147,6 +97,6 @@ int		main(int argc, char **argv)
 		mlx_loop(g.env.mlx);
 	}
 	else
-		ft_error(2);
+		error(2);
 	return (0);
 }

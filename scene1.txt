@@ -1,3 +1,2 @@
-objects
-sphere: radius(5), origin(100,100,100)
-sphere: radius(5), origin(100,100,100)
+sphere: origin(100,200,300) radius(5)
+sphere: origin(400,500,600) radius(5)

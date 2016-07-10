@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 07:54:39 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/09 15:41:47 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/10 18:30:47 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int		quitwin()
 {
 	//VV FREE MALLOCS BELOW VV
+	//free lists();
 	exit(0);
 }
 
 int		key_press(int keycode)
 {
-	if (keycode == KB_ESC)
+	printf("key: %i \n", keycode);
+	if (keycode == KB_ESC || keycode ==  KB_ESC_X11)
 	{
 		quitwin();
 	}

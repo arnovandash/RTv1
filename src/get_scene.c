@@ -6,95 +6,87 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/09 18:17:42 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/10 22:06:54 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-/*
-void	load_objects(t_glob *g, char *file)
+//TODO
+//REMOVE PRINTF STATEMENTS
+
+
+
+static void	load_list(t_glob *g, char *data, int field, int type)
 {
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		ft_error(3);
-	g->map.y = 0;
-	while (get_next_line(fd, &g->map.buf))
-	{
-		g->map.x = 0;
-		while (*(g->map.buf) != '\0')
-		{
-			if ((*(g->map.buf) >= '0') && (*(g->map.buf) <= '9'))
-				g->map.x++;
-			g->map.buf++;
-		}
-		g->map.y++;
-	}
-	g->env.ex = g->map.x;
-	g->env.ey = g->map.y;
-	g->env.map = (int **)malloc(sizeof(int *) * g->map.y);
-				whilft_isdigit(g->env.cursor)!= 1)
-	while (++g->map.i <= g->map.x)
-		g->env.map[g->map.i] = (int *)malloc(sizeof(int) * g->map.x);
-	if (g->env.map == NULL)
-		ft_error(1);
-	close(fd);
-}
+/*
+	Type 2 = Cylinder
+	Type 3 = Cone
+	Type 1 = Sphere
 */
+	if (type == 1)
+	{
+	
+		
+		
+		(field == 1)?g->node_s->orig_x = ft_atoi(data):0;
+	printf("origx: %i\n", g->node_s->orig_x);
+		(field == 2)?g->node_s->orig_y = ft_atoi(data):0;
+	printf("origy: %i\n", g->node_s->orig_y);
+		(field == 3)?g->node_s->orig_z = ft_atoi(data):0;
+	printf("origz: %i\n", g->node_s->orig_z);
+		(field == 4)?g->node_s->radius = ft_atoi(data):0;
+	printf("rad: %i\n", g->node_s->radius);
+	}
 
+}
 
 void		get_sphere(t_glob *g)
 {
-	t_sphere_list *node;
-	
-	node = (t_sphere_list *)malloc(sizeof(t_sphere_list));
+	char	*data;
+	int	field;
+	int	i;
 
-	while (ft_isdigit((int)g->env.cursor) != 1)
+	field = 0;
+	i = 0;
+	(data = (char *)malloc(sizeof(char) * 11))?0:error(1);
+	while (*g->env.cursor != '\0')
 	{
-	// interate until digit
-		printf("char: %c\n", *(g->env.cursor));
-			g->env.cursor++;
-	
+		if ((*g->env.cursor >= '0') && (*g->env.cursor <= '9'))
+			data[i++] = *(g->env.cursor);
+		if ((*g->env.cursor == ',') || (*g->env.cursor == ')'))
+		{	
+			field++;
+			data[i++] = '\0';
+			load_list(g, data, field, 1);
+			i = 0;
+		}
+		g->env.cursor++;
 	}
+	g->spheres++;
+		free(data);
 }
-
 
 void	get_scene(t_glob *g, char *file)
 {
-	g->env.fd = open(file, O_RDONLY);
-	g->head = NULL;
-	g->current = NULL;
-	// READ FILE line
-	g->env.cursor++;
+	g->head_s = NULL;
+	(g->env.fd = open(file, O_RDONLY))?0:error(3);
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
-		while (*(g->env.cursor) != '\0')
+		while (*g->env.cursor != '\0')
 		{
-			//detect a sphere
-			printf("Cursor char: %c\n", *g->env.cursor);
-			if (*(g->env.cursor++) == 's')
-				if (*g->env.cursor == 'p')
-					get_sphere(g); 
-			//	printf("!!!!!!!!!!!Cursor char: %c\n", *g->env.cursor);
-			//		}
-
-
-
-
-			/*	OLD WOLF MAP CODE
-				if ((*(g->map.buf) >= '0') && (*(g->map.buf) <= '9'))
-				{
-				str[0] = *(g->map.buf);
-				g->env.map[g->map.y][g->map.x] = ft_atoi(str);
-				g->map.x += 1;
-				}
-				*/
-
-
-//			g->env.cursor++;
+			if ((*(g->env.cursor++) == 's')&& *g->env.cursor == 'p')
+			{
+				(g->head_s == NULL)?(g->head_s = g->node_s):\
+					    (g->node_s = g->node_s->next);
+				//	:(g->node_s = g->head_s);
+				(g->node_s = (t_sphere_list *)malloc\
+				 (sizeof(t_sphere_list)))?0:error(1);
+				get_sphere(g);
+			}
+		}
+		g->env.cursor++;
 	}
-}
-close(g->env.fd);
+	(g->head_s != NULL)?g->node_s->next = NULL:0;
+	close(g->env.fd);
 }
