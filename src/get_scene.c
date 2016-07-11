@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/11 15:55:53 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/11 18:21:30 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		get_sphere(t_glob *g)
 
 	g->data_field = 0;
 	i = 0;
-	(data = (char *)malloc(sizeof(char) * 11))?0:error(1);
+	(data = (char *)malloc(sizeof(char) * 11)) ? 0 : error(1);
 	while (*g->env.cursor != '\0')
 	{
 		if ((*g->env.cursor >= '0') && (*g->env.cursor <= '9'))
@@ -57,30 +57,30 @@ void		get_sphere(t_glob *g)
 		g->env.cursor++;
 	}
 	g->spheres++;
-	g->node_s->next = NULL;
 	g->head_s = g->node_s;
 		free(data);
 }
 
 void	get_scene(t_glob *g, char *file)
 {
-	g->head_s = NULL;
-	(g->env.fd = open(file, O_RDONLY))?0:error(3);
+	g->head_s = NULL;//////
+	(g->env.fd = open(file, O_RDONLY)) ? 0 : error(3);
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
 		while (*g->env.cursor != '\0')
 		{
-			if ((*(g->env.cursor++) == 's')&& *g->env.cursor == 'p')
+			if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
 			{
-//				(g->head_s == NULL)?(g->head_s = g->node_s):\
-//					    (g->node_s = g->node_s->next);
-				(g->node_s = (t_sphere_list *)malloc\
-				 (sizeof(t_sphere_list)))?0:error(1);
+				(g->head_s == NULL) ? (g->head_s = ft_lstnew()) : 
+					(ft_lstadd(&g->head_s, ft_lstnew()));
+
+				(g->node_s = (t_sphere_list *)malloc
+				 (sizeof(t_sphere_list))) ? 0 : error(1);
 				get_sphere(g);
 			}
-		}
 		g->env.cursor++;
+		}
 	}
-//	(g->head_s != NULL)= g->head_s = g->node_s:0;
+//	(g->head_s == NULL)? 0 : (g->node_s->next = NULL);
 	close(g->env.fd);
 }
