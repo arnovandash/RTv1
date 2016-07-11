@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/10 21:49:50 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/11 13:47:53 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,11 @@ typedef struct				s_glob
 	t_ray					ray;
 	t_env					env;
 	t_sphere_list			sphere;
+// 		PARSER FUNCTIONS
+	int						data_field;
+	char					*data;
+	
+	//	char					*parse;
 }							t_glob;
 
 void						get_sphere(t_glob *g);

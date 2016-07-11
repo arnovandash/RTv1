@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/10 22:06:54 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/11 15:55:53 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 //TODO
 //REMOVE PRINTF STATEMENTS
-
-
 
 static void	load_list(t_glob *g, char *data, int field, int type)
 {
@@ -26,9 +24,6 @@ static void	load_list(t_glob *g, char *data, int field, int type)
 */
 	if (type == 1)
 	{
-	
-		
-		
 		(field == 1)?g->node_s->orig_x = ft_atoi(data):0;
 	printf("origx: %i\n", g->node_s->orig_x);
 		(field == 2)?g->node_s->orig_y = ft_atoi(data):0;
@@ -38,16 +33,14 @@ static void	load_list(t_glob *g, char *data, int field, int type)
 		(field == 4)?g->node_s->radius = ft_atoi(data):0;
 	printf("rad: %i\n", g->node_s->radius);
 	}
-
 }
 
 void		get_sphere(t_glob *g)
 {
 	char	*data;
-	int	field;
-	int	i;
+	int		i;
 
-	field = 0;
+	g->data_field = 0;
 	i = 0;
 	(data = (char *)malloc(sizeof(char) * 11))?0:error(1);
 	while (*g->env.cursor != '\0')
@@ -56,14 +49,16 @@ void		get_sphere(t_glob *g)
 			data[i++] = *(g->env.cursor);
 		if ((*g->env.cursor == ',') || (*g->env.cursor == ')'))
 		{	
-			field++;
+			g->data_field++;
 			data[i++] = '\0';
-			load_list(g, data, field, 1);
+			load_list(g, data, g->data_field, 1);
 			i = 0;
 		}
 		g->env.cursor++;
 	}
 	g->spheres++;
+	g->node_s->next = NULL;
+	g->head_s = g->node_s;
 		free(data);
 }
 
@@ -77,9 +72,8 @@ void	get_scene(t_glob *g, char *file)
 		{
 			if ((*(g->env.cursor++) == 's')&& *g->env.cursor == 'p')
 			{
-				(g->head_s == NULL)?(g->head_s = g->node_s):\
-					    (g->node_s = g->node_s->next);
-				//	:(g->node_s = g->head_s);
+//				(g->head_s == NULL)?(g->head_s = g->node_s):\
+//					    (g->node_s = g->node_s->next);
 				(g->node_s = (t_sphere_list *)malloc\
 				 (sizeof(t_sphere_list)))?0:error(1);
 				get_sphere(g);
@@ -87,6 +81,6 @@ void	get_scene(t_glob *g, char *file)
 		}
 		g->env.cursor++;
 	}
-	(g->head_s != NULL)?g->node_s->next = NULL:0;
+//	(g->head_s != NULL)= g->head_s = g->node_s:0;
 	close(g->env.fd);
 }

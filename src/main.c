@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/10 22:06:56 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/11 16:28:41 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ int		main(int argc, char **argv)
 		t_sphere_list *ptr = g.head_s;
 
 printf("PRINTLIST:\n");
-		while (ptr != NULL)
+int i = 0;
+while ( i <= 2)
 		{
 		printf("origx %i, origy %i\n",ptr->orig_x, ptr->orig_y);
-//		ptr = ptr->next;
+		ptr = ptr->next;
 		}
 
 
