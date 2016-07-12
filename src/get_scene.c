@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/11 18:21:30 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/12 14:31:02 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void		get_sphere(t_glob *g)
 		if ((*g->env.cursor >= '0') && (*g->env.cursor <= '9'))
 			data[i++] = *(g->env.cursor);
 		if ((*g->env.cursor == ',') || (*g->env.cursor == ')'))
-		{	
+		{
+			printf("hhhhh\n");
 			g->data_field++;
 			data[i++] = '\0';
 			load_list(g, data, g->data_field, 1);
@@ -56,14 +57,14 @@ void		get_sphere(t_glob *g)
 		}
 		g->env.cursor++;
 	}
-	g->spheres++;
-	g->head_s = g->node_s;
-		free(data);
+//	g->spheres++;
+	(g->node_s->next = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
+	g->node_s = g->node_s->next;
+	free(data);
 }
 
 void	get_scene(t_glob *g, char *file)
 {
-	g->head_s = NULL;//////
 	(g->env.fd = open(file, O_RDONLY)) ? 0 : error(3);
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
@@ -71,16 +72,16 @@ void	get_scene(t_glob *g, char *file)
 		{
 			if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
 			{
-				(g->head_s == NULL) ? (g->head_s = ft_lstnew()) : 
-					(ft_lstadd(&g->head_s, ft_lstnew()));
-
-				(g->node_s = (t_sphere_list *)malloc
-				 (sizeof(t_sphere_list))) ? 0 : error(1);
+				if (g->head_s == NULL)
+				{
+					(g->head_s = (t_sphere_list *)malloc
+					 (sizeof(t_sphere_list))) ? 0 : error(1);
+					g->node_s = g->head_s;
+				}
 				get_sphere(g);
 			}
-		g->env.cursor++;
 		}
 	}
-//	(g->head_s == NULL)? 0 : (g->node_s->next = NULL);
+	g->node_s->next = NULL;
 	close(g->env.fd);
 }

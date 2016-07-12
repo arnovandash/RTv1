@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/11 13:47:53 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/12 14:00:15 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
-
 # include <math.h>
 
 # define WIN_W 640
@@ -39,9 +38,6 @@
 # define KB_DOWN_X11 65364
 # define KB_LEFT_X11 65361
 # define KB_RIGHT_X11 65363
-
-
-
 
 /*
 # define RED1		0xFF0000
@@ -78,13 +74,11 @@
  *
  */
 
-
-
 typedef struct				s_vector
 {
-	float					x;
-	float					y;
-	float					z;
+	int						x;
+	int						y;
+	int						z;
 }							t_vector;
 
 typedef	struct				s_ray
@@ -108,7 +102,7 @@ typedef struct	s_env
 
 typedef struct				s_sphere_list
 {
-	int						item_number;
+	int						key;
 	int					radius;
 	int					orig_x;
 	int					orig_y;
@@ -121,7 +115,7 @@ typedef struct				s_glob
 	t_sphere_list			*head_s;
 	t_sphere_list			*current_s;
 	t_sphere_list			*node_s;
-	int				spheres;
+//	int						spheres;
 	t_vector				coord;
 	t_ray					ray;
 	t_env					env;
@@ -129,8 +123,6 @@ typedef struct				s_glob
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
-	
-	//	char					*parse;
 }							t_glob;
 
 void						get_sphere(t_glob *g);
