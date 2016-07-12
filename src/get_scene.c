@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 14:31:02 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/12 18:24:19 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,9 @@ static void	load_list(t_glob *g, char *data, int field, int type)
 	if (type == 1)
 	{
 		(field == 1)?g->node_s->orig_x = ft_atoi(data):0;
-	printf("origx: %i\n", g->node_s->orig_x);
 		(field == 2)?g->node_s->orig_y = ft_atoi(data):0;
-	printf("origy: %i\n", g->node_s->orig_y);
 		(field == 3)?g->node_s->orig_z = ft_atoi(data):0;
-	printf("origz: %i\n", g->node_s->orig_z);
 		(field == 4)?g->node_s->radius = ft_atoi(data):0;
-	printf("rad: %i\n", g->node_s->radius);
 	}
 }
 
@@ -49,7 +45,6 @@ void		get_sphere(t_glob *g)
 			data[i++] = *(g->env.cursor);
 		if ((*g->env.cursor == ',') || (*g->env.cursor == ')'))
 		{
-			printf("hhhhh\n");
 			g->data_field++;
 			data[i++] = '\0';
 			load_list(g, data, g->data_field, 1);

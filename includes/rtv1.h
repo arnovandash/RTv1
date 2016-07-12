@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 14:00:15 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/12 18:20:41 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,6 @@ int							ft_esc(int keycode);
 //////////////////////////////// FIX PROTOTYPE //////////
 /////////////////////////////// CHECK FOR LEAKS /////////
 int							quitwin();//t_glob *g);
-int							key_press(int keycode);//, t_glob *g);
+int							key_press(int keycode, t_glob *g);
 int							key_release(int keycode, t_glob *g);
 #endif

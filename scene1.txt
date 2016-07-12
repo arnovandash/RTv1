@@ -1,1 +1,1 @@
-sphere: origin(111,666,600) radius(5)
+sphere: (111,666,600) radus(5)
