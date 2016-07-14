@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 18:20:41 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/11 17:17:32 by kchetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
+
 # include <math.h>
 
 # define WIN_W 640
@@ -38,6 +39,9 @@
 # define KB_DOWN_X11 65364
 # define KB_LEFT_X11 65361
 # define KB_RIGHT_X11 65363
+
+
+
 
 /*
 # define RED1		0xFF0000
@@ -74,11 +78,23 @@
  *
  */
 
+typedef struct				s_cam
+{
+	float					fov;
+	int					orig_x;
+	int					orig_y;
+	int					orig_z;
+	int					dir_x;
+	int					dir_y;
+	int					dir_z;
+
+}							t_cam;
+
 typedef struct				s_vector
 {
-	int						x;
-	int						y;
-	int						z;
+	float					x;
+	float					y;
+	float					z;
 }							t_vector;
 
 typedef	struct				s_ray
@@ -102,7 +118,7 @@ typedef struct	s_env
 
 typedef struct				s_sphere_list
 {
-	int						key;
+	int						item_number;
 	int					radius;
 	int					orig_x;
 	int					orig_y;
@@ -115,14 +131,19 @@ typedef struct				s_glob
 	t_sphere_list			*head_s;
 	t_sphere_list			*current_s;
 	t_sphere_list			*node_s;
-//	int						spheres;
+	int				spheres;
+	t_cam				cam;
+	int				cam_read;
 	t_vector				coord;
 	t_ray					ray;
 	t_env					env;
+	int					type;
 	t_sphere_list			sphere;
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
+	
+	//	char					*parse;
 }							t_glob;
 
 void						get_sphere(t_glob *g);
@@ -132,6 +153,6 @@ int							ft_esc(int keycode);
 //////////////////////////////// FIX PROTOTYPE //////////
 /////////////////////////////// CHECK FOR LEAKS /////////
 int							quitwin();//t_glob *g);
-int							key_press(int keycode, t_glob *g);
+int							key_press(int keycode);//, t_glob *g);
 int							key_release(int keycode, t_glob *g);
 #endif
