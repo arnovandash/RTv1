@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 18:20:41 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 11:24:59 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,22 @@
  *
  */
 
+typedef struct				s_cam
+{
+//	int						key;i
+	int						cam_read;
+	float					fov;
+	int					orig_x;
+	int					orig_y;
+	int					orig_z;
+	int					dir_x;
+	int					dir_y;
+	int					dir_z;
+
+	struct s_cam_list	*next;
+}							t_cam;
+
+
 typedef struct				s_vector
 {
 	int						x;
@@ -100,9 +116,11 @@ typedef struct	s_env
 	int						endian;
 }							t_env;
 
+/*Object List*/
+
 typedef struct				s_sphere_list
 {
-	int						key;
+//	int						key;
 	int					radius;
 	int					orig_x;
 	int					orig_y;
@@ -110,12 +128,40 @@ typedef struct				s_sphere_list
 	struct s_sphere_list	*next;
 }							t_sphere_list;
 
+/*Scene*/ 
+
+typedef struct				s_lights_list
+{
+//	int						key;
+	float					fov;
+	int					orig_x;
+	int					orig_y;
+	int					orig_z;
+	int					dir_x;
+	int					dir_y;
+	int					dir_z;
+
+	struct s_lights_list	*next;
+}							t_lights_list;
+
+
+
+
+
 typedef struct				s_glob
 {
+
+	//REMOVE OBSOLETE VALUES
 	t_sphere_list			*head_s;
 	t_sphere_list			*current_s;
 	t_sphere_list			*node_s;
 //	int						spheres;
+	
+	t_cam					*cam;
+	
+	
+	
+	
 	t_vector				coord;
 	t_ray					ray;
 	t_env					env;
@@ -125,8 +171,12 @@ typedef struct				s_glob
 	char					*data;
 }							t_glob;
 
+
+void						obj_list(t_glob *g, char *data, int col, int type);
+void						env_list(t_glob *g, char *data, int col, int type);
 void						get_sphere(t_glob *g);
-void						get_scene(t_glob *g, char *file);
+void						get_cam(t_glob *g);
+void						read_scene(t_glob *g, char *file);
 void						error(int err);
 int							ft_esc(int keycode);
 //////////////////////////////// FIX PROTOTYPE //////////

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 18:19:58 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 14:29:17 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,22 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		get_scene(&g, argv[1]);
+		read_scene(&g, argv[1]);
 
 		t_sphere_list *ptr = g.head_s;
-
+		g.cam->cam_read = 0;
 		printf("PRINTLIST:\n");
 		while (ptr->next != NULL)
 		{
 			printf("origx %i, origy %i\n", ptr->orig_x, ptr->orig_y);
 			ptr = ptr->next;
 		}
-
+//		printf("CAMERA VALUES:\n");
+//		printf("Origin - \n x: %d\n y: %d\n z: %d\n", g.cam->orig_x, 
+//				g.cam->orig_y, g.cam->orig_z);
+//		printf("Direction - \n x: %d\n y: %d\n z: %d\n", g.cam->dir_x, 
+//				g.cam->dir_y, g.cam->dir_z);
+//		printf("FOV: %f\n", g.cam->fov);
 		g.env.mlx = mlx_init();
 		g.env.win = mlx_new_window(g.env.mlx, WIN_W, WIN_H, "RTv1");
 		mlx_hook(g.env.win, 2, (1L << 0), &key_press, &g);

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/12 18:24:19 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 14:36:12 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,23 @@
 
 //TODO
 //REMOVE PRINTF STATEMENTS
+//
+	/////// HOOK UP FILE ERROR!!!!!!!!!!!!!!!!!!!!!!
 
-static void	load_list(t_glob *g, char *data, int field, int type)
+
+
+
+/*
+void	env_list(t_glob *g, char *data, int col, int type)
+{
+
+	Type 2 = ?????
+	Type 3 = Lights
+	Type 1 = Camera
+
+}
+*/
+void	obj_list(t_glob *g, char *data, int col, int type)
 {
 /*
 	Type 2 = Cylinder
@@ -24,47 +39,24 @@ static void	load_list(t_glob *g, char *data, int field, int type)
 */
 	if (type == 1)
 	{
-		(field == 1)?g->node_s->orig_x = ft_atoi(data):0;
-		(field == 2)?g->node_s->orig_y = ft_atoi(data):0;
-		(field == 3)?g->node_s->orig_z = ft_atoi(data):0;
-		(field == 4)?g->node_s->radius = ft_atoi(data):0;
+		(col == 1)?g->node_s->orig_x = ft_atoi(data):0;
+		(col == 2)?g->node_s->orig_y = ft_atoi(data):0;
+		(col == 3)?g->node_s->orig_z = ft_atoi(data):0;
+		(col == 4)?g->node_s->radius = ft_atoi(data):0;
 	}
 }
 
-void		get_sphere(t_glob *g)
+void	read_scene(t_glob *g, char *file)
 {
-	char	*data;
-	int		i;
 
-	g->data_field = 0;
-	i = 0;
-	(data = (char *)malloc(sizeof(char) * 11)) ? 0 : error(1);
-	while (*g->env.cursor != '\0')
-	{
-		if ((*g->env.cursor >= '0') && (*g->env.cursor <= '9'))
-			data[i++] = *(g->env.cursor);
-		if ((*g->env.cursor == ',') || (*g->env.cursor == ')'))
-		{
-			g->data_field++;
-			data[i++] = '\0';
-			load_list(g, data, g->data_field, 1);
-			i = 0;
-		}
-		g->env.cursor++;
-	}
-//	g->spheres++;
-	(g->node_s->next = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
-	g->node_s = g->node_s->next;
-	free(data);
-}
-
-void	get_scene(t_glob *g, char *file)
-{
+		printf("sdfdsfsdfdsffsd");
+	/////// HOOK UP FILE ERROR!!!!!!!!!!!!!!!!!!!!!!
 	(g->env.fd = open(file, O_RDONLY)) ? 0 : error(3);
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
 		while (*g->env.cursor != '\0')
 		{
+			/*		READ SPHERE		*/
 			if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
 			{
 				if (g->head_s == NULL)
@@ -75,6 +67,19 @@ void	get_scene(t_glob *g, char *file)
 				}
 				get_sphere(g);
 			}
+			/*		READ CAM		*/
+			if ((*(g->env.cursor++) == 'c') && *g->env.cursor == 'a')
+			{
+//				if (g->head_cam == NULL)
+//				{
+//					(g->head_cam = (t_sphere_list *)malloc
+//					 (sizeof(t_sphere_list))) ? 0 : error(1);
+//					g->node_cam = g->head_cam;
+//				}
+		printf("sdfdsfsdfdsffsd");
+				get_cam(g);
+			}
+
 		}
 	}
 	g->node_s->next = NULL;
