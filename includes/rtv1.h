@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/11 17:17:32 by kchetty          ###   ########.fr       */
+/*   Updated: 2016/07/15 00:19:07 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct				s_glob
 	//	char					*parse;
 }							t_glob;
 
+int						render(t_glob *g);
 void						get_sphere(t_glob *g);
 void						get_scene(t_glob *g, char *file);
 void						error(int err);

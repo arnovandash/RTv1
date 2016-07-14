@@ -6,7 +6,7 @@
 #    By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/25 11:55:33 by arnovan-          #+#    #+#              #
-#    Updated: 2016/07/09 15:33:46 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/07/14 23:29:35 by arnovan-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,10 @@ PATH_SRC= ./src/
 PATH_HD= -I includes/
 
 SRC = $(PATH_SRC)main.c $(PATH_SRC)controls.c $(PATH_SRC)errors.c\
-		$(PATH_SRC)get_scene.c
+		$(PATH_SRC)get_scene.c $(PATH_SRC)draw.c
 
-OBJ = main.o controls.o errors.o get_scene.o
+
+OBJ = main.o controls.o errors.o get_scene.o draw.o
 
 $(NAME):
 	@echo "Compiling binaries..."

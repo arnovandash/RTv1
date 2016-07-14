@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/13 17:20:57 by kchetty          ###   ########.fr       */
+/*   Updated: 2016/07/14 23:40:25 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int		main(int argc, char **argv)
 		printf("FOV: %f\n", g.cam.fov);
 		g.env.mlx = mlx_init();
 		g.env.win = mlx_new_window(g.env.mlx, WIN_W, WIN_H, "RTv1");
+	
+		render(&g);
 		mlx_hook(g.env.win, 2, (1L << 0), &key_press, &g);
 		mlx_hook(g.env.win, 17, 0L, &quitwin, &g.env);
 		mlx_loop(g.env.mlx);
