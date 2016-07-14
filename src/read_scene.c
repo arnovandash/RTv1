@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 14:56:20 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 18:28:54 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,40 @@ void	obj_list(t_glob *g, char *data, int col, int type)
 
 void	read_scene(t_glob *g, char *file)
 {
-
-		printf("sdfdsfsdfdsffsd");
+	printf("cam_read = %i\n", g->cam_read);
 	/////// HOOK UP FILE ERROR!!!!!!!!!!!!!!!!!!!!!!
 	(g->env.fd = open(file, O_RDONLY)) ? 0 : error(3);
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
 		while (*g->env.cursor != '\0')
 		{
-			/*		READ SPHERE		*/
-			if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
+			
+			
+			/*			READ CAM		*/
+		if ((*(g->env.cursor++) == 'c') && (*g->env.cursor == 'a') &&
+				(g->cam_read == 0))
 			{
+
+
+				printf("cam_LOOP!!!!!!!!!!!!! = %i\n", g->cam_read);
+				get_cam(g);
+				printf("cam_read = %i\n", g->cam_read);
+			}
+
+			/*		READ SPHERE		*/
+		else if ((*g->env.cursor == 's') && (*(g->env.cursor + 5) == 'e'))
+			{
+//				if (*g->env.cursor == '')
+//				printf("TEST: %s\n", g->env.cursor);
 				if (g->head_s == NULL)
 				{
 					(g->head_s = (t_sphere_list *)malloc
 					 (sizeof(t_sphere_list))) ? 0 : error(1);
 					g->node_s = g->head_s;
+//				printf("ssssssssssssLOOP!!!!!!!!!!!!! = %i\n", g->cam_read);
 				}
 				get_sphere(g);
-			}
-			/*		READ CAM		*/
-			if ((*(g->env.cursor++) == 'c') && *g->env.cursor == 'a' && 
-					(g->cam_read == 0))
-				get_cam(g);
-
+			}	
 		}
 	}
 	g->node_s->next = NULL;

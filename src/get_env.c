@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 10:51:06 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 14:55:02 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 18:28:56 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 static void	load_cam(t_glob *g, char *data, int col)
 {
-	(col == 1)?g->cam->orig_x = ft_atoi(data):0;
-	(col == 2)?g->cam->orig_y = ft_atoi(data):0;
-	(col == 3)?g->cam->orig_z = ft_atoi(data):0;
-	(col == 4)?g->cam->dir_x = ft_atoi(data):0;
-	(col == 5)?g->cam->dir_y = ft_atoi(data):0;
-	(col == 6)?g->cam->dir_z = ft_atoi(data):0;
-	(col == 7)?g->cam->fov = ft_atoi(data):0;
+	(col == 1)?g->cam.orig_x = ft_atoi(data):0;
+	(col == 2)?g->cam.orig_y = ft_atoi(data):0;
+	(col == 3)?g->cam.orig_z = ft_atoi(data):0;
+	(col == 4)?g->cam.dir_x = ft_atoi(data):0;
+	(col == 5)?g->cam.dir_y = ft_atoi(data):0;
+	(col == 6)?g->cam.dir_z = ft_atoi(data):0;
+	(col == 7)?g->cam.fov = ft_atoi(data):0;
+
 }
 
 void		get_cam(t_glob *g)
@@ -42,6 +43,14 @@ void		get_cam(t_glob *g)
 		}
 		g->env.cursor++;
 	}
+	
+	printf("CAMERA VALUES:\n");
+		printf("Origin - \n x: %d\n y: %d\n z: %d\n", g->cam.orig_x, 
+				g->cam.orig_y, g->cam.orig_z);
+		printf("Direction - \n x: %d\n y: %d\n z: %d\n", g->cam.dir_x, 
+				g->cam.dir_y, g->cam.dir_z);
+		printf("FOV: %f\n", g->cam.fov);
+
 	g->cam_read = 1;
 	free(g->data);
 }

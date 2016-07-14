@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 14:53:51 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 16:47:53 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@
 
 typedef struct				s_cam
 {
-//	int						key;i
 	float					fov;
 	int					orig_x;
 	int					orig_y;
@@ -85,7 +84,6 @@ typedef struct				s_cam
 	int					dir_y;
 	int					dir_z;
 
-	struct s_cam_list	*next;
 }							t_cam;
 
 
@@ -156,7 +154,7 @@ typedef struct				s_glob
 	t_sphere_list			*node_s;
 //	int						spheres;
 	
-	t_cam					*cam;	
+	t_cam					cam;	
 	int						cam_read;
 	
 	
