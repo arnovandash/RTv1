@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 14:36:12 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 14:56:20 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,9 @@ void	read_scene(t_glob *g, char *file)
 				get_sphere(g);
 			}
 			/*		READ CAM		*/
-			if ((*(g->env.cursor++) == 'c') && *g->env.cursor == 'a')
-			{
-//				if (g->head_cam == NULL)
-//				{
-//					(g->head_cam = (t_sphere_list *)malloc
-//					 (sizeof(t_sphere_list))) ? 0 : error(1);
-//					g->node_cam = g->head_cam;
-//				}
-		printf("sdfdsfsdfdsffsd");
+			if ((*(g->env.cursor++) == 'c') && *g->env.cursor == 'a' && 
+					(g->cam_read == 0))
 				get_cam(g);
-			}
 
 		}
 	}

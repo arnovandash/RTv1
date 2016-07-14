@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 10:51:06 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 12:28:28 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/14 14:55:02 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		get_cam(t_glob *g)
 {
 	int		i;
 
-	g->data_field = 0;
 	i = 0;
 	(g->data = (char *)malloc(sizeof(char) * 11)) ? 0 : error(1);
 	while (*g->env.cursor != '\0')
@@ -43,6 +42,6 @@ void		get_cam(t_glob *g)
 		}
 		g->env.cursor++;
 	}
+	g->cam_read = 1;
 	free(g->data);
-	g->cam->cam_read = 1;
 }
