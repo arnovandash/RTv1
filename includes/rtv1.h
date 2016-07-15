@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 11:44:45 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 17:47:43 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef	struct				s_ray
 {
 	t_vector				start;
 	t_vector				dir;
-	t_vector				cam_right;
-	t_vector				cam_down;
+//	t_vector				cam_right;
+//	t_vector				cam_down;
 }							t_ray;
 
 typedef struct	s_env
@@ -120,7 +120,7 @@ typedef struct	s_env
 
 typedef struct				s_sphere_list
 {
-	int						item_number;
+//	int						item_number;
 	int					radius;
 	int					orig_x;
 	int					orig_y;
@@ -131,12 +131,14 @@ typedef struct				s_sphere_list
 typedef struct				s_glob
 {
 	t_sphere_list			*head_s;
-	t_sphere_list			*current_s;
 	t_sphere_list			*node_s;
-	int				spheres;
+//	int				spheres;
+
 	t_cam				cam;
 	int				cam_read;
-	t_vector				coord;
+
+	t_vector				vec;
+	
 	t_ray					ray;
 	t_env					env;
 	int					type;
@@ -145,19 +147,16 @@ typedef struct				s_glob
 	int						data_field;
 	char					*data;
 	
-	//	char					*parse;
 }							t_glob;
 
-
-
-
-float						dot_product(t_vector a, t_vector b);
+float						dot_prod(t_vector a, t_vector b);
 float						magnitude(t_vector a);
 t_vector					normalize(t_vector c);
 t_vector					negative(t_vector c);
-t_vector					cross_product(t_vector a, t_vector b);
-t_vector					add_vector(t_vector a, t_vector b);
-t_vector					mult_vector(t_vector a, t_vector b);
+t_vector					cross_prod(t_vector a, t_vector b);
+t_vector					add_vec(t_vector a, t_vector b);
+t_vector					multiply_vec(t_vector a, t_vector b);
+t_vector					subtract_vec(t_vector a, t_vector b);
 
 int							render(t_glob *g);
 void						get_sphere(t_glob *g);

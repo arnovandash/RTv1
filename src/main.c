@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/14 23:40:25 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 17:47:44 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		main(int argc, char **argv)
 
 	t_glob		g;
 
-	g.spheres = 0;
+//	g.spheres = 0;
 	g.type = 0;
 	g.cam_read = 0;
 	if (argc == 2)
