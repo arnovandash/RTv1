@@ -1,7 +1,7 @@
 Scene stuff:
 camera:	origin(113,121,131)	direction(000,000,001) fov(43)
-Object sphere: origin(111,222,600) radus(1)
-Object sphere: origin(222,555,111) radus(2)
-Object sphere: origin(668,888,999) radus(3)
-Object sphere: origin(332,555,144) radus(4)
-Object sphere: origin(777,333,111) radus(5)
+Object sphere: origin(111,222,200) radus(100)
+Object sphere: origin(222,555,111) radus(40)
+Object sphere: origin(400,400,200) radus(50)
+Object sphere: origin(332,555,144) radus(60)
+Object sphere: origin(500,333,111) radus(80)

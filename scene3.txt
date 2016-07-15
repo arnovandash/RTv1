@@ -1,0 +1,4 @@
+Scene stuff:
+camera:	origin(113,121,131)	direction(000,000,001) fov(43)
+Object sphere: origin(444,333,200) radius(100)
+Object sphere: origin(111,222,200) radius(100)

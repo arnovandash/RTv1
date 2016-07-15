@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 20:11:31 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 22:35:22 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct				s_glob
 {
 	t_sphere_list			*head_s;
 	t_sphere_list			*node_s;
+	t_sphere_list			*current_s;
 //	int				spheres;
 
 	t_cam				cam;
@@ -169,7 +170,7 @@ void						error(int err);
 int							ft_esc(int keycode);
 //////////////////////////////// FIX PROTOTYPE //////////
 /////////////////////////////// CHECK FOR LEAKS /////////
-int							quitwin();//t_glob *g);
-int							key_press(int keycode);//, t_glob *g);
+int							quitwin(t_glob *g);
+int							key_press(int keycode, t_glob *g);
 int							key_release(int keycode, t_glob *g);
 #endif

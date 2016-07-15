@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 21:58:47 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 23:39:11 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,6 @@ static void		draw(t_glob *g, int x, int y)
 
 static int		calc(t_glob *g)
 {
-/*
-	float a;
-	float b;
-	float c;
-	float discriminant;
-	t_vector	dist;
-	t_vector	sphere;
-	t_vector	ray;
-	t_vector	dir;
-	int radius;
-
-	radius = 20;
-
-	ray.x = 0;
-	ray.y = 0;
-	ray.z = 0;
-
-	sphere.x = 30;
-	sphere.y = 30;
-	sphere.z = 10;
-
-	dir.x = 0;
-	dir.y = 0;
-	dir.z = 1;
-
-	a = dot_prod(dir, dir);
-	dist = subtract_vec(ray, sphere);
-	b =  2 * dot_prod(dir, dist);
-	c = (dot_prod(dist, dist) - (radius * radius));
-	discriminant = (b * b - 4 * a * c);
-
-	if (discriminant < 0)
-		return (0);
-	else
-		return (1);
-	
-	a = dot_prod(g->ray.dir, g->ray.dir);
-*/
-
 	t_sphere_list	*read;
 	float a;
 	float b;
@@ -67,18 +28,18 @@ static int		calc(t_glob *g)
 	float discriminant;
 	t_vector	dist;
 
-	(read = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
-	a = dot_prod(g->ray.dir, g->ray.dir);
-	dist = subtract_vec(g->ray.start, read->origin);
-	b =  2 * dot_prod(g->ray.dir, dist);
-	c = (dot_prod(dist, dist) - (read->radius * read->radius));
-	discriminant = (b * b - 4 * a * c);
 
+	(read = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
+	a = dot_prod(g->cam.dir, g->cam.dir);
+	dist = subtract_vec(g->ray.start, g->head_s->origin);
+	b =  2 * dot_prod(g->cam.dir, dist);
+	c = (dot_prod(dist, dist) - (g->head_s->radius * g->head_s->radius));
+	discriminant = (b * b - 4 * a * c);
+	free(read);
 	if (discriminant < 0)
 		return (0);
 	else
 		return (1);
-
 }
 
 int			render(t_glob *g)
@@ -97,7 +58,7 @@ int			render(t_glob *g)
 	ray_hit = 0;
 	x = 0;
 	y = 0;
-
+	g->ray.start.z = 1;
 	printf("RENDERING, PLEASE WAIT...\n");
 
 	while (read->next != NULL)
@@ -105,15 +66,17 @@ int			render(t_glob *g)
 		
 		while (y < WIN_H)
 		{	
+			g->ray.start.y = y;
 			while (x < WIN_W)
 			{
+				g->ray.start.x = x;
 				//////////////////// CALC
 				ray_hit = calc(g);
 				//CAST RAY!
 				if (ray_hit == 1)
 				{
 					draw(g, x, y);
-					printf("ray hit %i \n", ray_hit);
+				//	printf("ray hit %i \n", ray_hit);
 					ray_hit = 0;
 				}
 				x++;
