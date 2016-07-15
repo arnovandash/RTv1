@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 00:19:07 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 11:44:45 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef	struct				s_ray
 {
 	t_vector				start;
 	t_vector				dir;
+	t_vector				cam_right;
+	t_vector				cam_down;
 }							t_ray;
 
 typedef struct	s_env
@@ -146,7 +148,18 @@ typedef struct				s_glob
 	//	char					*parse;
 }							t_glob;
 
-int						render(t_glob *g);
+
+
+
+float						dot_product(t_vector a, t_vector b);
+float						magnitude(t_vector a);
+t_vector					normalize(t_vector c);
+t_vector					negative(t_vector c);
+t_vector					cross_product(t_vector a, t_vector b);
+t_vector					add_vector(t_vector a, t_vector b);
+t_vector					mult_vector(t_vector a, t_vector b);
+
+int							render(t_glob *g);
 void						get_sphere(t_glob *g);
 void						get_scene(t_glob *g, char *file);
 void						error(int err);
