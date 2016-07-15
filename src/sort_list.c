@@ -6,7 +6,7 @@
 /*   By: kchetty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/15 17:52:44 by kchetty           #+#    #+#             */
-/*   Updated: 2016/07/15 18:34:45 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 20:07:31 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_sphere_list	*sort_list(t_sphere_list *org)
 	tmp = org;
 	while (tmp->next != NULL)
 	{
-		if (num_compare(tmp->orig_z, tmp->next->orig_z) == 1)
+		if (num_compare(tmp->origin.z, tmp->next->origin.z) == 1)
 		{
-			num = tmp->orig_z;
-			tmp->orig_z = tmp->next->orig_z;
-			tmp->next->orig_z = num;
+			num = tmp->origin.z;
+			tmp->origin.z = tmp->next->origin.z;
+			tmp->next->origin.z = num;
 			tmp = org;
 		}
 		else

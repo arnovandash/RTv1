@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 18:16:30 by kchetty          ###   ########.fr       */
+/*   Updated: 2016/07/15 20:11:31 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,27 @@
  *
  */
 
-typedef struct				s_cam
-{
-	float					fov;
-	int					orig_x;
-	int					orig_y;
-	int					orig_z;
-	int					dir_x;
-	int					dir_y;
-	int					dir_z;
-
-}							t_cam;
-
 typedef struct				s_vector
 {
 	float					x;
 	float					y;
 	float					z;
 }							t_vector;
+
+
+typedef struct				s_cam
+{
+	float					fov;
+	t_vector				origin;
+	t_vector				dir;
+//	int					orig_x;
+//	int					orig_y;
+//	int					orig_z;
+//	int					dir_x;
+//	int					dir_y;
+//	int					dir_z;
+
+}							t_cam;
 
 typedef	struct				s_ray
 {
@@ -122,9 +125,10 @@ typedef struct				s_sphere_list
 {
 //	int						item_number;
 	int					radius;
-	int					orig_x;
-	int					orig_y;
-	int					orig_z;
+	t_vector				origin;
+//	int					orig_x;
+//	int					orig_y;
+//	int					orig_z;
 	struct s_sphere_list	*next;
 }							t_sphere_list;
 
