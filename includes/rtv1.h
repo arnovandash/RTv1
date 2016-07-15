@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 17:47:43 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 18:16:30 by kchetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ t_vector					cross_prod(t_vector a, t_vector b);
 t_vector					add_vec(t_vector a, t_vector b);
 t_vector					multiply_vec(t_vector a, t_vector b);
 t_vector					subtract_vec(t_vector a, t_vector b);
-
+t_sphere_list				*sort_list(t_sphere_list *org);
 int							render(t_glob *g);
 void						get_sphere(t_glob *g);
 void						get_scene(t_glob *g, char *file);
