@@ -1,5 +1,4 @@
 Scene stuff:
-camera:	origin(112,111,111)	direction(000,000,001) fov(45)
 camera:	origin(113,121,131)	direction(000,000,001) fov(43)
 Object sphere: origin(111,222,600) radus(1)
 Object sphere: origin(222,555,111) radus(2)

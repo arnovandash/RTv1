@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 20:11:29 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/15 21:58:47 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,68 +21,65 @@ static void		draw(t_glob *g, int x, int y)
 
 static int		calc(t_glob *g)
 {
+/*
+	float a;
+	float b;
+	float c;
+	float discriminant;
+	t_vector	dist;
+	t_vector	sphere;
+	t_vector	ray;
+	t_vector	dir;
+	int radius;
+
+	radius = 20;
+
+	ray.x = 0;
+	ray.y = 0;
+	ray.z = 0;
+
+	sphere.x = 30;
+	sphere.y = 30;
+	sphere.z = 10;
+
+	dir.x = 0;
+	dir.y = 0;
+	dir.z = 1;
+
+	a = dot_prod(dir, dir);
+	dist = subtract_vec(ray, sphere);
+	b =  2 * dot_prod(dir, dist);
+	c = (dot_prod(dist, dist) - (radius * radius));
+	discriminant = (b * b - 4 * a * c);
+
+	if (discriminant < 0)
+		return (0);
+	else
+		return (1);
+	
+	a = dot_prod(g->ray.dir, g->ray.dir);
+*/
+
 	t_sphere_list	*read;
 	float a;
 	float b;
 	float c;
-	float discrim;
+	float discriminant;
 	t_vector	dist;
-	
+
 	(read = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
-	//float a = dot product raydir * raydir
 	a = dot_prod(g->ray.dir, g->ray.dir);
-
-	//vector dist = subtract vect (ray_start - sphere_pos)
 	dist = subtract_vec(g->ray.start, read->origin);
-
-
-	//float b = 2 * (dot_product (ray direction *	vect dist)
 	b =  2 * dot_prod(g->ray.dir, dist);
+	c = (dot_prod(dist, dist) - (read->radius * read->radius));
+	discriminant = (b * b - 4 * a * c);
 
-
-	//float c = dot_product (dist * dist) - (radius * radius)
-
-	c = (dot_prod(dist, dist) - (read->radius));
-
-	//float disc = b * b - 4 * a *c  // Quadratic disc
-	discrim = (b * b - 4 * a * c);
-	
-	// if < 0 == missed else hit!!!!!!!!!!!!!!
-
-	if (discrim < 0)
+	if (discriminant < 0)
 		return (0);
 	else
 		return (1);
 
-
-
-		//read object info
-/*
-	t_vector	vec_x;
-	t_vector	vec_y;
-	t_vector	vec_z;
-
-	vec_x.x = 1;
-	vec_x.y = 0;
-	vec_x.z = 0;
-	vec_y.x = 0;
-	vec_y.y = 1;
-	vec_y.z = 0;
-	vec_z.x = 0;
-	vec_z.y = 0;
-	vec_z.z = 1;
-
-	g->ray.start.x = 1
-	g->ray.start.y = 1
-	g->ray.start.z = 1
-
-	g->ray.dir.x = 0
-	g->ray.dir.y = 0
-	g->ray.dir.z = 1
-*/
-
-	return (0);
-	}
+}
 
 int			render(t_glob *g)
 {
@@ -105,24 +102,27 @@ int			render(t_glob *g)
 
 	while (read->next != NULL)
 	{
-
+		
 		while (y < WIN_H)
 		{	
 			while (x < WIN_W)
 			{
 				//////////////////// CALC
 				ray_hit = calc(g);
-				
 				//CAST RAY!
 				if (ray_hit == 1)
+				{
 					draw(g, x, y);
-				ray_hit = 0;
+					printf("ray hit %i \n", ray_hit);
+					ray_hit = 0;
+				}
 				x++;
 			}
 			x = 0;
 			y++;
 		}
 		read = read->next;
+		y = 0;
 	}
 	printf("DONE RENDERING\n");
 	mlx_put_image_to_window(g->env.mlx, g->env.win, g->env.img, 0, 0);
