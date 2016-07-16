@@ -6,7 +6,7 @@
 #    By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/25 11:55:33 by arnovan-          #+#    #+#              #
-#    Updated: 2016/06/11 10:58:45 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/07/16 22:36:20 by arnovan-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,9 @@ SRC = $(PATH_SRC)ft_memset.c $(PATH_SRC)ft_strcpy.c $(PATH_SRC)ft_bzero.c\
 	  $(PATH_SRC)ft_strtrim.c $(PATH_SRC)ft_itoa.c $(PATH_SRC)ft_strsplit.c\
 	  $(PATH_SRC)ft_lstadd.c $(PATH_SRC)ft_lstdel.c $(PATH_SRC)ft_lstdelone.c\
 	  $(PATH_SRC)ft_lstnew.c $(PATH_SRC)ft_lstiter.c $(PATH_SRC)ft_lstmap.c\
-	  $(PATH_SRC)ft_lstpushback.c $(PATH_SRC)get_next_line.c
+	  $(PATH_SRC)ft_lstpushback.c $(PATH_SRC)get_next_line.c\
+	  $(PATH_SRC)ft_atof.c
+
 
 OBJ = ft_memset.o ft_strcpy.o ft_bzero.o \
 	  ft_memmove.o ft_memchr.o ft_memcmp.o \
@@ -68,7 +70,7 @@ OBJ = ft_memset.o ft_strcpy.o ft_bzero.o \
 	  ft_strtrim.o ft_strsplit.o ft_itoa.o\
 	  ft_lstadd.o ft_lstdel.o ft_lstdelone.o\
 	  ft_lstnew.o ft_lstiter.o ft_lstmap.o\
-	  ft_lstpushback.o get_next_line.o
+	  ft_lstpushback.o get_next_line.o ft_atof.o
 
 $(NAME): includes/libft.h
 	@$(CC) $(CFLAGS) -c $(SRC) $(PATH_HD)

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 20:59:28 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 00:34:18 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //TODO
@@ -43,6 +43,8 @@
 # define KB_DOWN_X11 65364
 # define KB_LEFT_X11 65361
 # define KB_RIGHT_X11 65363
+
+# define min(a,b) (((a) < (b)) ? (a) : (b))
 
 typedef struct				s_vector
 {
@@ -124,12 +126,14 @@ typedef struct				s_glob
 	t_ray					ray;
 	t_env					env;
 	int						type;
+
+	float						closest;
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
 }							t_glob;
 
-int						calc_sphere(t_glob *g, t_obj_list *read, int hit);
+int						calc_sphere(t_glob *g, t_obj_list *read);
 
 void						get_data(t_glob *g);
 float						dot_prod(t_vector a, t_vector b);
@@ -139,9 +143,10 @@ t_vector					negative(t_vector c);
 t_vector					cross_prod(t_vector a, t_vector b);
 t_vector					add_vec(t_vector a, t_vector b);
 t_vector					multiply_vec(t_vector a, t_vector b);
+
+t_vector					scale_vec(float x, t_vector a);
 t_vector					subtract_vec(t_vector a, t_vector b);
 void						render(t_glob *g);
-//void						get_sphere(t_glob *g);
 void						get_scene(t_glob *g, char *file);
 void						error(int err);
 int							ft_esc(int keycode);

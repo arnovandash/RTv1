@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/15 15:52:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 17:34:03 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 23:29:38 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 
 #include "rtv1.h"
+
+t_vector  scale_vec(float x, t_vector a)
+{
+	t_vector c;
+	
+	c.x = (a.x * x);
+	c.y = (a.y * x);
+	c.z = (a.z * x);
+	return (c);
+}
 
 float magnitude(t_vector a)
 {

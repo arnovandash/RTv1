@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 20:52:37 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 23:01:11 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	load_data(t_glob *g, char *data, int field)
 		(field == 2) ? g->node->sphere.origin.y = ft_atoi(data) : 0;
 		(field == 3) ? g->node->sphere.origin.z = ft_atoi(data) : 0;
 		(field == 4) ? g->node->sphere.radius = ft_atoi(data) : 0;
-		(field == 5) ? g->node->sphere.material = atof(data) : 0;
+		(field == 5) ? g->node->sphere.material = ft_atoi(data) : 0;
 	}
 	if (g->type == 0)
 	{
@@ -67,7 +67,7 @@ static void	load_data2(t_glob *g, char *data, int field)
 		(field == 1) ? g->node->material.diffuse.r = ft_atoi(data) : 0;
 		(field == 2) ? g->node->material.diffuse.g = ft_atoi(data) : 0;
 		(field == 3) ? g->node->material.diffuse.b = ft_atoi(data) : 0;
-		(field == 4) ? g->node->material.reflection = ft_atoi(data) : 0;
+		(field == 4) ? g->node->material.reflection = ft_atof(data) : 0;
 	}
 
 }
