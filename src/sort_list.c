@@ -6,7 +6,7 @@
 /*   By: kchetty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/15 17:52:44 by kchetty           #+#    #+#             */
-/*   Updated: 2016/07/16 09:34:17 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 09:54:49 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_sphere_list	*sort_list(t_sphere_list *org)
 		{
 			tmp1 = tmp->next->next;
 			tmp->next->next = tmp->next;
-			if (tmp2 == NULL)
+			if (tmp1 == NULL)
 				tmp->next = NULL;
 			else		
-				tmp->next  = tmp2;
+				tmp->next  = tmp1;
 			tmp = org;
 		}
 		else
