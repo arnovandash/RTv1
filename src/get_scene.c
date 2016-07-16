@@ -17,7 +17,8 @@
 
 static void	load_data(t_glob *g, char *data, int field)
 {
-/*
+
+/*	
 	Type 2 = Camera info
 	Type 3 = Cone
 	Type 1 = Sphere
@@ -80,16 +81,12 @@ void	get_scene(t_glob *g, char *file)
 		{
 			if ((*(g->env.cursor++) == 'c') && (*g->env.cursor == 'a') && (g->cam_read == 0))
 			{
-				printf("Im Here\n");
-				printf("CURSOR: %s\n", g->env.cursor);
 				g->type = 2;
 				g->cam_read = 1;
 				get_data(g);
 			}
 			else if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
 			{
-				printf("HI\n");
-				printf("CURSOR1: %s\n", g->env.cursor);
 				if (g->head_s == NULL)
 				{
 					g->head_s = (t_sphere_list *)malloc(sizeof(t_sphere_list));
@@ -98,12 +95,8 @@ void	get_scene(t_glob *g, char *file)
 				g->type = 1;
 				get_data(g);
 			}
-		//	else if (*g->env.cursor == '\0')
-		//		g->env.cursor++;
-		//	printf("CURSTFGD: %c\n", *g->env.cursor);
 		}
 	}
 	g->node_s->next = NULL;
-//	(g->head_s != NULL)= g->head_s = g->node_s:0;
 	close(g->env.fd);
 }

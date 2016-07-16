@@ -123,9 +123,9 @@ typedef struct	s_env
 
 typedef struct				s_sphere_list
 {
-//	int						item_number;
+	int					item_number;
 	int					radius;
-	t_vector				origin;
+	t_vector			origin;
 //	int					orig_x;
 //	int					orig_y;
 //	int					orig_z;
