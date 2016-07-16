@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 07:54:39 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 12:34:42 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 21:17:51 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@ int		quitwin(t_glob *g)
 	
 	//VV FREE MALLOCS BELOW VV
 	//free lists();
-	(tmp = (t_obj_list *)malloc(sizeof(t_obj_list))) ? 0 : error(1);
 	tmp = g->head;
-	while (tmp->next != NULL)
+	while (tmp != NULL)
 	{
 		g->current = tmp;
 		tmp = g->current->next;
-		free(tmp);
+		free(g->current);
 	}
-
-
+//	mlx_destroy_image(g->env.mlx, g->env.img);
+//	mlx_destroy_window(g->env.mlx, g->env.win);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 12:36:47 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 20:33:30 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int		main(int argc, char **argv)
 		printf("PRINTLIST:\n");
 	while (ptr->next != NULL)
 	{
-		printf("origx %f, origy %f origz: %f radius: %i\n",ptr->origin.x, ptr->origin.y, ptr->origin.z, ptr->radius);
+		printf("origx %f, origy %f origz: %f radius: %f material: %i\n",ptr->sphere.origin.x, ptr->sphere.origin.y, ptr->sphere.origin.z, ptr->sphere.radius, ptr->sphere.material);
+		printf("lightx %f, lighty %f, lightz: %f, r: %f, g: %f, b: %f\n",ptr->light.origin.x, ptr->light.origin.y, ptr->light.origin.z, ptr->light.intensity.r, ptr->light.intensity.g, ptr->light.intensity.b);
+		printf("diffuseR %f, diffuseG %f, diffuseB %f, reflection: %f\n\n",ptr->material.diffuse.r, ptr->material.diffuse.g, ptr->material.diffuse.b, ptr->material.reflection);
 		ptr = ptr->next;
 	}
 		/*printf("CAMERA VALUES:\n");

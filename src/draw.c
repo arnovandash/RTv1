@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 12:37:05 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 21:10:17 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,19 @@ static void		draw(t_glob *g, int x, int y)
 	g->env.data[((int)x * 4) + (y * g->env.size_line)] = 230;
 }
 
-static int		calc(t_glob *g, t_obj_list *read)
+static int		calc(t_glob *g, t_obj_list *read, int hit)
 {
-	float a;
-	float b;
-	float c;
-	float discriminant;
-	t_vector	dist;
-
-	a = dot_prod(g->cam.dir, g->cam.dir);
-	dist = subtract_vec(g->ray.start, read->origin);
-	b =  2 * dot_prod(g->cam.dir, dist);
-	c = (dot_prod(dist, dist) - (read->radius * read->radius));
-	discriminant = (b * b - 4 * a * c);
-	if (discriminant < 0)
-		return (0);
-	else
-		return (1);
+	if (ft_strcmp("sphere", read->obj_name) == 0)
+		hit = calc_sphere(g, read, hit);
+	return (hit);
 }
 
-int			render(t_glob *g)
+void			render(t_glob *g)
 {
 	int x;
 	int y;
 	int ray_hit;
-	t_obj_list	*read;
+//	t_obj_list	*read;
 
 	g->env.img = mlx_new_image(g->env.mlx, WIN_W, WIN_H);
 	g->env.data = mlx_get_data_addr(g->env.img, &g->env.bpp, &g->env.size_line, &g->env.endian);
@@ -59,17 +47,17 @@ int			render(t_glob *g)
 		g->ray.start.y = y;
 		while (x < WIN_W)
 		{
-		read = g->head;
-			while (read->next != NULL)
+		g->current = g->head;
+			while (g->current->next != NULL)
 			{
 				ray_hit = 0;
 				g->ray.start.x = x;
-				ray_hit = calc(g, read);
+				ray_hit = calc(g, g->current, ray_hit);
 				if (ray_hit == 1)
 				{
 					draw(g, x, y);
 				}
-				read = read->next;
+				g->current = g->current->next;
 			}
 			x++;
 		}
@@ -79,5 +67,4 @@ int			render(t_glob *g)
 	y = 0;
 	printf("DONE RENDERING\n");
 	mlx_put_image_to_window(g->env.mlx, g->env.win, g->env.img, 0, 0);
-	return (0);
 }
