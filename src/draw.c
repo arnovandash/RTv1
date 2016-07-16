@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 11:04:06 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 11:28:03 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@ static void		draw(t_glob *g, int x, int y)
 	g->env.data[((int)x * 4) + (y * g->env.size_line)] = 230;
 }
 
-static int		calc(t_glob *g)
+static int		calc(t_glob *g, t_sphere_list *read)
 {
-	t_sphere_list	*read;
 	float a;
 	float b;
 	float c;
 	float discriminant;
 	t_vector	dist;
 
-
-	(read = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
 	a = dot_prod(g->cam.dir, g->cam.dir);
-	dist = subtract_vec(g->ray.start, g->head_s->origin);
+	dist = subtract_vec(g->ray.start, read->origin);
 	b =  2 * dot_prod(g->cam.dir, dist);
-	c = (dot_prod(dist, dist) - (g->head_s->radius * g->head_s->radius));
+	c = (dot_prod(dist, dist) - (read->radius * read->radius));
 	discriminant = (b * b - 4 * a * c);
-	free(read);
 	if (discriminant < 0)
 		return (0);
 	else
@@ -48,8 +44,6 @@ int			render(t_glob *g)
 	int y;
 	int ray_hit;
 	t_sphere_list	*read;
-
-//	read = g->head_s;
 
 	g->env.img = mlx_new_image(g->env.mlx, WIN_W, WIN_H);
 	g->env.data = mlx_get_data_addr(g->env.img, &g->env.bpp, &g->env.size_line, &g->env.endian);
@@ -70,9 +64,12 @@ int			render(t_glob *g)
 			{
 				ray_hit = 0;
 				g->ray.start.x = x;
-				ray_hit = calc(g);
+				ray_hit = calc(g, read);
 				if (ray_hit == 1)
+				{
+					printf("\nHIT!! : %i\n", ray_hit);
 					draw(g, x, y);
+				}
 				read = read->next;
 			}
 			x++;
