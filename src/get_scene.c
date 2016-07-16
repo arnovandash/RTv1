@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 22:39:18 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 12:30:44 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	load_data(t_glob *g, char *data, int field)
 */
 	if (g->type == 1)
 	{
-		(field == 1) ? g->node_s->origin.x = ft_atoi(data) : 0;
-		(field == 2) ? g->node_s->origin.y = ft_atoi(data) : 0;
-		(field == 3) ? g->node_s->origin.z = ft_atoi(data) : 0;
-		(field == 4) ? g->node_s->radius = ft_atoi(data) : 0;
+		(field == 1) ? g->node->origin.x = ft_atoi(data) : 0;
+		(field == 2) ? g->node->origin.y = ft_atoi(data) : 0;
+		(field == 3) ? g->node->origin.z = ft_atoi(data) : 0;
+		(field == 4) ? g->node->radius = ft_atoi(data) : 0;
 	}
 	if (g->type == 2)
 	{
@@ -65,15 +65,15 @@ void		get_data(t_glob *g)
 	}
 	if(g->type == 1)
 	{
-		g->node_s->next = (t_sphere_list *)malloc(sizeof(t_sphere_list));
-		g->node_s = g->node_s->next;
+		g->node->next = (t_obj_list *)malloc(sizeof(t_obj_list));
+		g->node = g->node->next;
 	}
 	free(data);
 }
 
 void	get_scene(t_glob *g, char *file)
 {
-	g->head_s = NULL;
+	g->head = NULL;
 	((g->env.fd = open(file, O_RDONLY)) == -1) ? error(3) : 0;
 	while (get_next_line(g->env.fd, &g->env.cursor))
 	{
@@ -87,16 +87,16 @@ void	get_scene(t_glob *g, char *file)
 			}
 			else if ((*(g->env.cursor++) == 's') && *g->env.cursor == 'p')
 			{
-				if (g->head_s == NULL)
+				if (g->head == NULL)
 				{
-					g->head_s = (t_sphere_list *)malloc(sizeof(t_sphere_list));
-					g->node_s = g->head_s;
+					g->head = (t_obj_list *)malloc(sizeof(t_obj_list));
+					g->node = g->head;
 				}
 				g->type = 1;
 				get_data(g);
 			}
 		}
 	}
-	g->node_s->next = NULL;
+	g->node->next = NULL;
 	close(g->env.fd);
 }

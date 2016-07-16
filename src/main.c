@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 09:26:13 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 12:36:47 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ int		main(int argc, char **argv)
 	{
 		get_scene(&g, argv[1]);
 
-		t_sphere_list *ptr = g.head_s;
+		t_obj_list *ptr = g.head;
 		printf("T-spe: %p\n", ptr);
-		printf("g.head_s %p\n", g.head_s);
-		ptr = sort_list(g.head_s);
-
+		printf("g.head %p\n", g.head);
 
 		printf("PRINTLIST:\n");
 	while (ptr->next != NULL)

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 11:28:03 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 12:37:05 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		draw(t_glob *g, int x, int y)
 	g->env.data[((int)x * 4) + (y * g->env.size_line)] = 230;
 }
 
-static int		calc(t_glob *g, t_sphere_list *read)
+static int		calc(t_glob *g, t_obj_list *read)
 {
 	float a;
 	float b;
@@ -43,7 +43,7 @@ int			render(t_glob *g)
 	int x;
 	int y;
 	int ray_hit;
-	t_sphere_list	*read;
+	t_obj_list	*read;
 
 	g->env.img = mlx_new_image(g->env.mlx, WIN_W, WIN_H);
 	g->env.data = mlx_get_data_addr(g->env.img, &g->env.bpp, &g->env.size_line, &g->env.endian);
@@ -59,7 +59,7 @@ int			render(t_glob *g)
 		g->ray.start.y = y;
 		while (x < WIN_W)
 		{
-		read = g->head_s;
+		read = g->head;
 			while (read->next != NULL)
 			{
 				ray_hit = 0;
@@ -67,7 +67,6 @@ int			render(t_glob *g)
 				ray_hit = calc(g, read);
 				if (ray_hit == 1)
 				{
-					printf("\nHIT!! : %i\n", ray_hit);
 					draw(g, x, y);
 				}
 				read = read->next;

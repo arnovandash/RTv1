@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 07:54:39 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 22:41:43 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 12:34:42 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int		quitwin(t_glob *g)
 {
-	t_sphere_list	*tmp;
+	t_obj_list	*tmp;
 	
 	//VV FREE MALLOCS BELOW VV
 	//free lists();
-	(tmp = (t_sphere_list *)malloc(sizeof(t_sphere_list))) ? 0 : error(1);
-	tmp = g->head_s;
+	(tmp = (t_obj_list *)malloc(sizeof(t_obj_list))) ? 0 : error(1);
+	tmp = g->head;
 	while (tmp->next != NULL)
 	{
-		g->current_s = tmp;
-		tmp = g->current_s->next;
+		g->current = tmp;
+		tmp = g->current->next;
 		free(tmp);
 	}
 

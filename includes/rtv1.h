@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 09:35:27 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 12:39:54 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct	s_env
 	int						endian;
 }							t_env;
 
-typedef struct				s_sphere_list
+typedef struct				s_obj_list
 {
 	int					item_number;
 	int					radius;
@@ -129,14 +129,14 @@ typedef struct				s_sphere_list
 //	int					orig_x;
 //	int					orig_y;
 //	int					orig_z;
-	struct s_sphere_list	*next;
-}							t_sphere_list;
+	struct s_obj_list	*next;
+}							t_obj_list;
 
 typedef struct				s_glob
 {
-	t_sphere_list			*head_s;
-	t_sphere_list			*node_s;
-	t_sphere_list			*current_s;
+	t_obj_list			*head;
+	t_obj_list			*node;
+	t_obj_list			*current;
 //	int				spheres;
 
 	t_cam				cam;
@@ -147,7 +147,8 @@ typedef struct				s_glob
 	t_ray					ray;
 	t_env					env;
 	int					type;
-	t_sphere_list			sphere;
+	////VVVVV//////////////////////////// Keeping it??? VVV
+	t_obj_list			sphere;
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
@@ -162,7 +163,6 @@ t_vector					cross_prod(t_vector a, t_vector b);
 t_vector					add_vec(t_vector a, t_vector b);
 t_vector					multiply_vec(t_vector a, t_vector b);
 t_vector					subtract_vec(t_vector a, t_vector b);
-t_sphere_list				*sort_list(t_sphere_list *org);
 int							render(t_glob *g);
 void						get_sphere(t_glob *g);
 void						get_scene(t_glob *g, char *file);
