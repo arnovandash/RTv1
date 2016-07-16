@@ -6,7 +6,7 @@
 /*   By: kchetty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/15 17:52:44 by kchetty           #+#    #+#             */
-/*   Updated: 2016/07/15 20:07:31 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 09:34:17 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,20 @@ int				num_compare(float i, float j)
 
 t_sphere_list	*sort_list(t_sphere_list *org)
 {
-	t_sphere_list	*tmp;
-	float			num;
+	t_sphere_list		*tmp;
+	t_sphere_list		*tmp1;
 
 	tmp = org;
 	while (tmp->next != NULL)
 	{
 		if (num_compare(tmp->origin.z, tmp->next->origin.z) == 1)
 		{
-			num = tmp->origin.z;
-			tmp->origin.z = tmp->next->origin.z;
-			tmp->next->origin.z = num;
+			tmp1 = tmp->next->next;
+			tmp->next->next = tmp->next;
+			if (tmp2 == NULL)
+				tmp->next = NULL;
+			else		
+				tmp->next  = tmp2;
 			tmp = org;
 		}
 		else

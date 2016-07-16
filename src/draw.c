@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 23:39:11 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 09:12:36 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int			render(t_glob *g)
 
 	read = g->head_s;
 
-
 	g->env.img = mlx_new_image(g->env.mlx, WIN_W, WIN_H);
 	g->env.data = mlx_get_data_addr(g->env.img, &g->env.bpp, &g->env.size_line, &g->env.endian);
 
@@ -61,13 +60,12 @@ int			render(t_glob *g)
 	g->ray.start.z = 1;
 	printf("RENDERING, PLEASE WAIT...\n");
 
-	while (read->next != NULL)
-	{
-		
-		while (y < WIN_H)
-		{	
-			g->ray.start.y = y;
-			while (x < WIN_W)
+	while (y < WIN_H)
+	{	
+		g->ray.start.y = y;
+		while (x < WIN_W)
+		{
+			while (read->next != NULL)
 			{
 				g->ray.start.x = x;
 				//////////////////// CALC
@@ -76,17 +74,17 @@ int			render(t_glob *g)
 				if (ray_hit == 1)
 				{
 					draw(g, x, y);
-				//	printf("ray hit %i \n", ray_hit);
+					//	printf("ray hit %i \n", ray_hit);
 					ray_hit = 0;
 				}
-				x++;
+				read = read->next;
 			}
-			x = 0;
-			y++;
+			x++;
 		}
-		read = read->next;
-		y = 0;
+		x = 0;
+		y++;
 	}
+	y = 0;
 	printf("DONE RENDERING\n");
 	mlx_put_image_to_window(g->env.mlx, g->env.win, g->env.img, 0, 0);
 	return (0);

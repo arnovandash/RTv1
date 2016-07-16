@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/15 19:58:58 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 09:26:13 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int		main(int argc, char **argv)
 		printf("g.head_s %p\n", g.head_s);
 		ptr = sort_list(g.head_s);
 
-/*
+
 		printf("PRINTLIST:\n");
 	while (ptr->next != NULL)
 	{
-		printf("origx %i, origy %i origz: %i radius: %i\n",ptr->orig_x, ptr->orig_y, ptr->orig_z, ptr->radius);
+		printf("origx %f, origy %f origz: %f radius: %i\n",ptr->origin.x, ptr->origin.y, ptr->origin.z, ptr->radius);
 		ptr = ptr->next;
 	}
-		printf("CAMERA VALUES:\n");
+		/*printf("CAMERA VALUES:\n");
 		printf("Origin - \n x: %d\n y: %d\n z: %d\n", g.cam.orig_x, 
 				g.cam.orig_y, g.cam.orig_z);
 		printf("Direction - \n x: %d\n y: %d\n z: %d\n", g.cam.dir_x, 
