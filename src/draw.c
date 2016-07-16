@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 09:12:36 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/16 11:04:06 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			render(t_glob *g)
 	int ray_hit;
 	t_sphere_list	*read;
 
-	read = g->head_s;
+//	read = g->head_s;
 
 	g->env.img = mlx_new_image(g->env.mlx, WIN_W, WIN_H);
 	g->env.data = mlx_get_data_addr(g->env.img, &g->env.bpp, &g->env.size_line, &g->env.endian);
@@ -65,18 +65,14 @@ int			render(t_glob *g)
 		g->ray.start.y = y;
 		while (x < WIN_W)
 		{
+		read = g->head_s;
 			while (read->next != NULL)
 			{
+				ray_hit = 0;
 				g->ray.start.x = x;
-				//////////////////// CALC
 				ray_hit = calc(g);
-				//CAST RAY!
 				if (ray_hit == 1)
-				{
 					draw(g, x, y);
-					//	printf("ray hit %i \n", ray_hit);
-					ray_hit = 0;
-				}
 				read = read->next;
 			}
 			x++;
