@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 15:43:13 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 16:00:16 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 static void		draw(t_glob *g, int x, int y)
 {
-	g->env.data[((int)x * 4) + (y * g->env.size_line) + 2] = 100;
-	g->env.data[((int)x * 4) + (y * g->env.size_line) + 1] = 87;
-	g->env.data[((int)x * 4) + (y * g->env.size_line)] = 230;
+	g->red = (unsigned char)min(g->red*255.0f, 255.0f);
+	g->green = (unsigned char)min(g->green*255.0f, 255.0f);
+	g->blue = (unsigned char)min(g->blue*255.0f, 255.0f);
+	g->env.data[((int)x * 4) + (y * g->env.size_line) + 2] = g->red;
+	g->env.data[((int)x * 4) + (y * g->env.size_line) + 1] = g->green;
+	g->env.data[((int)x * 4) + (y * g->env.size_line)] = g->blue;
+
 }
 
 static int		calc(t_glob *g, t_obj_list *read, int hit)
