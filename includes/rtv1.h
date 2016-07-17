@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 12:13:42 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 15:43:15 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //TODO
@@ -79,14 +79,14 @@ typedef struct				s_sphere
 	float					radius;
 	int						material;
 }							t_sphere;
-
+/*
 typedef struct				s_cam
 {
 //	float					fov;
-//	t_vector				origin;
+	t_vector				origin;
 	t_vector				dir;
 }							t_cam;
-
+*/
 typedef	struct				s_ray
 {
 	t_vector				start;
@@ -122,12 +122,12 @@ typedef struct				s_glob
 	t_obj_list				*head;
 	t_obj_list				*node;
 	t_obj_list				*current;
-	t_cam					cam;
+	t_ray					cam;
 	int						cam_read;
 	t_vector				vec;
 	t_ray					ray;
 	t_ray					light_ray;
-	t_ray					current_light;
+	t_light					current_light;
 	t_material				current_mat;
 	t_vector				scaled;
 	t_vector				new_start;
@@ -137,7 +137,7 @@ typedef struct				s_glob
 	int						type;
 	int						in_shadow;
 	float						coef;
-	float						closest;
+	float						nearest;
 	float						lambert;
 	float						reflect;
 	float						red;
@@ -149,9 +149,11 @@ typedef struct				s_glob
 	char					*data;
 }							t_glob;
 
-int						calc_sphere(t_glob *g, t_obj_list *read);
-
+int							calc_sphere(t_ray ray, t_sphere sphere, float near);
+//int							calc_shadow(t_glob *g);
+void						calc_light(t_glob *g);
 void						get_data(t_glob *g);
+void						get_material(t_glob *g, int num);
 float						dot_prod(t_vector a, t_vector b);
 float						magnitude(t_vector a);
 t_vector					normalize(t_vector c);
@@ -162,6 +164,8 @@ t_vector					multiply_vec(t_vector a, t_vector b);
 
 t_vector					scale_vec(float x, t_vector a);
 t_vector					subtract_vec(t_vector a, t_vector b);
+
+
 void						render(t_glob *g);
 void						get_scene(t_glob *g, char *file);
 void						error(int err);

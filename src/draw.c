@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 12:13:47 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 15:43:13 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,27 @@ static void		draw(t_glob *g, int x, int y)
 
 static int		calc(t_glob *g, t_obj_list *read, int hit)
 {
+	if (ft_strcmp("sphere node", read->obj_name) == 0)
+		hit = calc_sphere(g->cam, read->sphere, g->nearest);
 
-	if (ft_strcmp("sphere", read->obj_name) == 0)
-		hit = calc_sphere(g, read);
+	get_material(g, read->sphere.material);
+
+	g->scaled = scale_vec(g->nearest, g->ray.dir);
+	g->new_start = add_vec(g->ray.start, g->scaled);
+	g->normal = subtract_vec(g->new_start, read->sphere.origin);
+	g->temp = dot_prod(g->normal, g->normal);
+	if (g->temp == 0)
+		return (0);
+
+	g->temp = 1.0f / sqrtf(g->temp);
+	g->normal = scale_vec(g->temp, g->normal);
+
+
+
+	calc_light(g);
+	
 	return (hit);
 }
-
 
 void			render(t_glob *g)
 {

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/25 13:35:35 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 11:47:11 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 15:10:15 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,14 @@
 //cylinder
 //sphere
 
-
-
-
 #include "rtv1.h"
-
 
 int		main(int argc, char **argv)
 {
-
 	t_glob		g;
 
 	g.coef = 1.0;
-	g.closest = 20000.0f;
+	g.nearest = 20000.0f;
 	g.type = 0;
 	g.cam_read = 0;
 	if (argc == 2)

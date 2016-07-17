@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 09:42:25 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 14:39:38 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	load_data(t_glob *g, char *data, int field)
 	//ADD obj name
 	if (g->type == 1)
 	{
-		g->node->obj_name = "sphere";
+		g->node->obj_name = "sphere node";
 		(field == 1) ? g->node->sphere.origin.x = ft_atof(data) : 0;
 		(field == 2) ? g->node->sphere.origin.y = ft_atof(data) : 0;
 		(field == 3) ? g->node->sphere.origin.z = ft_atof(data) : 0;
@@ -53,7 +53,7 @@ static void	load_data2(t_glob *g, char *data, int field)
 {
 	if (g->type == 2)
 	{
-		g->node->obj_name = "light";
+		g->node->obj_name = "light node";
 		(field == 1) ? g->node->light.origin.x = ft_atof(data) : 0;
 		(field == 2) ? g->node->light.origin.y = ft_atof(data) : 0;
 		(field == 3) ? g->node->light.origin.z = ft_atof(data) : 0;
@@ -63,7 +63,7 @@ static void	load_data2(t_glob *g, char *data, int field)
 	}
 	if (g->type == 3)
 	{
-		g->node->obj_name = "material";
+		g->node->obj_name = "material node";
 		(field == 1) ? g->node->material.diffuse.r = ft_atof(data) : 0;
 		(field == 2) ? g->node->material.diffuse.g = ft_atof(data) : 0;
 		(field == 3) ? g->node->material.diffuse.b = ft_atof(data) : 0;
