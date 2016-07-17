@@ -1,6 +1,6 @@
 Scene stuff:
 Camera: origin(113,121,131)	direction(000,000,001) fov(43)
-Sphere: origin(111,222,200) radius(100) texture(1)
-Sphere: origin(444,333,200) radius(100) surface(1)
+Sphere: origin(111,222,200) radius(100) material(1)
+Sphere: origin(444,333,200) radius(100) material(1)
 Lights: position(555,555,100) intensity(1,1,1)
-Material: diffuse(040,030,070) reflection(5.22)
+Material: diffuse(040,030,070) reflection(5.22) type(1)

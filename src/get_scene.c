@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 12:50:58 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/16 23:01:11 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 09:42:25 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	load_data(t_glob *g, char *data, int field)
 	if (g->type == 1)
 	{
 		g->node->obj_name = "sphere";
-		(field == 1) ? g->node->sphere.origin.x = ft_atoi(data) : 0;
-		(field == 2) ? g->node->sphere.origin.y = ft_atoi(data) : 0;
-		(field == 3) ? g->node->sphere.origin.z = ft_atoi(data) : 0;
-		(field == 4) ? g->node->sphere.radius = ft_atoi(data) : 0;
+		(field == 1) ? g->node->sphere.origin.x = ft_atof(data) : 0;
+		(field == 2) ? g->node->sphere.origin.y = ft_atof(data) : 0;
+		(field == 3) ? g->node->sphere.origin.z = ft_atof(data) : 0;
+		(field == 4) ? g->node->sphere.radius = ft_atof(data) : 0;
 		(field == 5) ? g->node->sphere.material = ft_atoi(data) : 0;
 	}
 	if (g->type == 0)
@@ -40,9 +40,9 @@ static void	load_data(t_glob *g, char *data, int field)
 //		(field == 1) ? g->cam.origin.x = ft_atoi(data) : 0;
 //		(field == 2) ? g->cam.origin.y = ft_atoi(data) : 0;
 //		(field == 3) ? g->cam.origin.z = ft_atoi(data) : 0;
-		(field == 4) ? g->cam.dir.x = ft_atoi(data) : 0;
-		(field == 5) ? g->cam.dir.y = ft_atoi(data) : 0;
-		(field == 6) ? g->cam.dir.z = ft_atoi(data) : 0;
+		(field == 4) ? g->cam.dir.x = ft_atof(data) : 0;
+		(field == 5) ? g->cam.dir.y = ft_atof(data) : 0;
+		(field == 6) ? g->cam.dir.z = ft_atof(data) : 0;
 //		(field == 7) ? g->cam.fov = ft_atoi(data) : 0;
 	}
 	load_data2(g, data, g->data_field);
@@ -54,20 +54,21 @@ static void	load_data2(t_glob *g, char *data, int field)
 	if (g->type == 2)
 	{
 		g->node->obj_name = "light";
-		(field == 1) ? g->node->light.origin.x = ft_atoi(data) : 0;
-		(field == 2) ? g->node->light.origin.y = ft_atoi(data) : 0;
-		(field == 3) ? g->node->light.origin.z = ft_atoi(data) : 0;
-		(field == 4) ? g->node->light.intensity.r = ft_atoi(data) : 0;
-		(field == 5) ? g->node->light.intensity.g = ft_atoi(data) : 0;
-		(field == 6) ? g->node->light.intensity.b = ft_atoi(data) : 0;
+		(field == 1) ? g->node->light.origin.x = ft_atof(data) : 0;
+		(field == 2) ? g->node->light.origin.y = ft_atof(data) : 0;
+		(field == 3) ? g->node->light.origin.z = ft_atof(data) : 0;
+		(field == 4) ? g->node->light.intensity.r = ft_atof(data) : 0;
+		(field == 5) ? g->node->light.intensity.g = ft_atof(data) : 0;
+		(field == 6) ? g->node->light.intensity.b = ft_atof(data) : 0;
 	}
 	if (g->type == 3)
 	{
 		g->node->obj_name = "material";
-		(field == 1) ? g->node->material.diffuse.r = ft_atoi(data) : 0;
-		(field == 2) ? g->node->material.diffuse.g = ft_atoi(data) : 0;
-		(field == 3) ? g->node->material.diffuse.b = ft_atoi(data) : 0;
+		(field == 1) ? g->node->material.diffuse.r = ft_atof(data) : 0;
+		(field == 2) ? g->node->material.diffuse.g = ft_atof(data) : 0;
+		(field == 3) ? g->node->material.diffuse.b = ft_atof(data) : 0;
 		(field == 4) ? g->node->material.reflection = ft_atof(data) : 0;
+		(field == 5) ? g->node->material.num = ft_atoi(data) : 0;
 	}
 
 }

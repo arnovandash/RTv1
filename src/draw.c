@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 12:07:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 00:34:04 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 11:31:09 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,79 +26,84 @@ static int		calc(t_glob *g, t_obj_list *read, int hit)
 	t_vector	n;
 	float		temp;
 
+
 	if (ft_strcmp("sphere", read->obj_name) == 0)
 		hit = calc_sphere(g, read);
 	scaled = scale_vec(g->closest, g->ray.dir);
 	new_start = add_vec(g->ray.start, scaled);
 	n = subtract_vec(new_start, read->sphere.origin);
 	temp = dot_prod(n, n);
-//	(temp == 0)?0:0;
+	(temp == 0)? return (0) : 0; ////check case
 
 	temp = 1.0f / sqrtf(temp);
 	n = scale_vec(temp, n);
 
+	
 ////////////////////WARNING!!! MESSY CODE AHEAD!!!!!//////////////////////
+	
+	
+
 
 /* Find the material to determine the colour */
-material currentMat = materials[spheres[currentSphere].material];
+	material current_mat = materials[spheres[currentSphere].material];
 
-/* Find the value of the light at this point */
-unsigned int j;
-for(j=0; j < 3; j++)
-{
-	t_light currentLight = //current light from list lights[j];
-	t_vector dist = subtract_vec(g->light.origin, newStart);
-	if(dot_prod(n, dist) <= 0.0f) continue; //WTF?
-	float t = sqrtf(dot_prod( dist, dist));
-	if(t <= 0.0f) continue;
+	// iterate through list to hit light!!!!!
 
-	t_ray lightRay;
-	lightRay.start = newStart;
-	lightRay.dir = scale_vec((1/t), dist);
+	/* Find the value of the light at this point */
+	unsigned int j;
+	for(j=0; j < 3; j++) // iterate through lights
+	{
+		t_light current_light = //current light from list lights[j];
+		t_vector dist = subtract_vec(g->light.origin, new_start);
+		if(dot_prod(n, dist) <= 0.0f) continue; //!!restart loop for next light
+		
+	////////// WTF ////////////
+		float t = sqrtf(dot_prod( dist, dist));
+		if(t <= 0.0f) continue; //!!restart loop for next light
+		
+	////////// WTF ////////////
 
-	/* Calculate shadows */
-	bool inShadow = false;
-	unsigned int k;
-	for (k = 0; k < 3; ++k) {
-		if (calc_sphere(lightRay, t_obj_list sphere)){
-			inShadow = true;
-			break;
+
+		t_ray light_ray;
+		light_ray.start = new_start;
+		light_ray.dir = scale_vec((1/t), dist);
+
+		/* Calculate shadows */
+		g->in_shadow = 0;
+		unsigned int k;
+		for (k = 0; k < 3; ++k) { //iterate through list
+			if (calc_sphere(light_ray, t_obj_list sphere)){
+				g->in_shadow = 1;
+				break;
+			}
+		}
+		if (g->in_shadow == 0)
+		{
+			/* Lambert diffusion */
+			g->lambert = dot_prod(light_ray.dir, n) * g->coef; 
+			g->red += g->lambert * current_light.intensity.r * current_mat.diffuse.r;
+			g->green += g->lambert * current_light.intensity.g * current_mat.diffuse.g;
+			g->blue += g->lambert * current_light.intensity.b * current_mat.diffuse.b;
 		}
 	}
-	if (!inShadow){
-		/* Lambert diffusion */
-		float lambert = dot_prod(lightRay.dir, n) * coef; 
-		red += lambert * currentLight.intensity.red * currentMat.diffuse.red;
-		green += lambert * currentLight.intensity.green * currentMat.diffuse.green;
-		blue += lambert * currentLight.intensity.blue * currentMat.diffuse.blue;
-	}
-}
-/* Iterate over the reflection */
-coef *= currentMat.reflection;
+	/* Iterate over the reflection */
+	g->coef *= current_mat.reflection;
 
-/* The reflected ray start and direction */
-g->ray.start = newStart;
-float reflect = 2.0f * dot_prod(&r.dir, &n);
-t_vector tmp = scale_vec(reflect, n);
-g->ray.dir = subtract_vec(g->ray.dir, tmp);
+	/* The reflected ray start and direction */
+	g->ray.start = new_start;
+	g->reflect = 2.0f * dot_prod(g->ray.dir, n);
+	t_vector tmp = scale_vec(g->reflect, n);
+	g->ray.dir = subtract_vec(g->ray.dir, tmp);
 
-level++;
+	g->level++;
 
 
 
-//////////////////// STRUCTURE THIS SHIT MOTHERFUCKER ///////////////////////
+	//////////////////// STRUCTURE THIS SHIT MOTHERFUCKER ///////////////////////
 
-
-
-
-
-
-
-
-
-	
 	return (hit);
 }
+
 
 void			render(t_glob *g)
 {
@@ -114,13 +119,13 @@ void			render(t_glob *g)
 	y = 0;
 	g->ray.start.z = 1;
 	printf("RENDERING, PLEASE WAIT...\n");
-
 	while (y < WIN_H)
 	{	
+		g->level = 0;
 		g->ray.start.y = y;
 		while (x < WIN_W)
 		{
-		g->current = g->head;
+			g->current = g->head;
 			while (g->current->next != NULL)
 			{
 				ray_hit = 0;

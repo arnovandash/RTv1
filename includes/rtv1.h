@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 00:34:18 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 11:31:12 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //TODO
@@ -62,6 +62,7 @@ typedef struct				s_colour
 
 typedef struct				s_material
 {
+	int					num;
 	t_colour				diffuse;
 	float					reflection;
 }							t_material;
@@ -125,9 +126,16 @@ typedef struct				s_glob
 	t_vector				vec;
 	t_ray					ray;
 	t_env					env;
+	int						level;
 	int						type;
-
+	int						in_shadow;
+	float						coef;
 	float						closest;
+	float						lambert;
+	float						reflect;
+	float						red;
+	float						green;
+	float						blue;
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
