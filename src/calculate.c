@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:39:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 12:13:44 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 13:00:59 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int		calc_sphere(t_glob *g, t_obj_list *read)
 		return (find_roots(g, discriminant, b));
 }
 
-/*
+int		calc_light(t_glob, t_obj_list *read)
+{
+
+
 
 	g->scaled = scale_vec(g->closest, g->ray.dir);
 	g->new_start = add_vec(g->ray.start, g->scaled);
@@ -65,7 +68,6 @@ int		calc_sphere(t_glob *g, t_obj_list *read)
 ////////////////////WARNING!!! MESSY CODE AHEAD!!!!!//////////////////////
 	
 	
-
 
 // Find the material to determine the colour 
 
@@ -124,4 +126,12 @@ int		calc_sphere(t_glob *g, t_obj_list *read)
 
 	//////////////////// STRUCTURE THIS SHIT MOTHERFUCKER ///////////////////////
 
-*/
+void		get_material(t_glob	)
+{
+	t_obj_list	*ptr;
+
+
+
+}
+
+
