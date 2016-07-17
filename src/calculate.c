@@ -6,11 +6,12 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:39:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 16:08:09 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 17:33:00 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
 static int		find_roots(float nearest, float discriminant, float b)
 {
 	float	x1;
@@ -22,6 +23,8 @@ static int		find_roots(float nearest, float discriminant, float b)
 
 	if (x1 > x2)
 		x1 = x2;
+
+	printf("X1 = %f\n", x1);
 
 	if ((x1 > 0.001f) && (x1 < nearest))
 	{
@@ -79,29 +82,6 @@ static void		calc_shadow(t_glob *g)
 	}
 }
 
-
-////////////////SPHERE INTERSECT BACKUP///////////
-/*
-int		calc_sphere(t_glob *g, t_obj_list *read)
-{
-	float a;
-	float b;
-	float c;
-	float discriminant;
-
-	a = dot_prod(g->cam.dir, g->cam.dir);
-	g->dist = subtract_vec(g->ray.start, read->sphere.origin);
-	b =  2 * dot_prod(g->cam.dir, g->dist);
-	c = (dot_prod(g->dist, g->dist) - (read->sphere.radius * read->sphere.radius));
-	discriminant = (b * b - 4 * a * c);
-	if (discriminant < 0)
-		return (0);
-	else
-		return (find_roots(g, discriminant, b));
-}
-*/
-
-
 void		calc_light(t_glob *g)
 {
 	t_obj_list	*ptr;
@@ -110,6 +90,7 @@ void		calc_light(t_glob *g)
 
 	while (ptr->next != NULL)
 	{
+		printf("TEST\n");
 		if (ft_strcmp("light node", ptr->obj_name) == 0)
 		{
 			g->current_light = ptr->light;
@@ -139,20 +120,16 @@ void		calc_light(t_glob *g)
 			g->reflect = 2.0f * dot_prod(g->ray.dir, g->normal);
 			t_vector tmp = scale_vec(g->reflect, g->normal);
 			g->ray.dir = subtract_vec(g->ray.dir, tmp);
-
 			g->level++;
-
-			ptr = ptr->next;	
 		}
+		ptr = ptr->next;	
 	}
 }
-
-
-
 
 void		get_material(t_glob *g, int num)
 {
 	t_obj_list	*ptr;
+
 
 	ptr = g->head;
 	while (ptr->next != NULL)
@@ -160,7 +137,7 @@ void		get_material(t_glob *g, int num)
 		if (ft_strcmp("material node", ptr->obj_name) == 0)
 			if (ptr->material.num == num)
 				g->current_mat = ptr->material;
-	}
+		ptr = ptr->next;
+	}		
+	printf("material diffuse %f, %f, %f\n", g->current_mat.diffuse.r, g->current_mat.diffuse.g, g->current_mat.diffuse.b);
 }
-
-
