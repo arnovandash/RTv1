@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 08:40:19 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/07/17 11:31:12 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/07/17 12:13:42 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //TODO
@@ -118,6 +118,7 @@ typedef struct				s_obj_list
 
 typedef struct				s_glob
 {
+	t_env					env;
 	t_obj_list				*head;
 	t_obj_list				*node;
 	t_obj_list				*current;
@@ -125,7 +126,13 @@ typedef struct				s_glob
 	int						cam_read;
 	t_vector				vec;
 	t_ray					ray;
-	t_env					env;
+	t_ray					light_ray;
+	t_ray					current_light;
+	t_material				current_mat;
+	t_vector				scaled;
+	t_vector				new_start;
+	t_vector				normal;
+	t_vector				dist;
 	int						level;
 	int						type;
 	int						in_shadow;
@@ -136,6 +143,7 @@ typedef struct				s_glob
 	float						red;
 	float						green;
 	float						blue;
+	float						temp;
 // 		PARSER FUNCTIONS
 	int						data_field;
 	char					*data;
